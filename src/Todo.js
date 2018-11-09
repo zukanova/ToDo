@@ -3,10 +3,13 @@ import './App.css'
 
 class Todo extends Component {
   render() {
-    const { text, click, isDone } = this.props
+    const { text, onToggle, isDone, onDelete } = this.props
     return (
-      <li onClick={click} className={isDone ? 'done' : ''}>
-        {text}
+      <li>
+        <span onClick={onToggle} className={isDone ? 'done' : ''}>
+          {text}
+        </span>
+        <button onClick={onDelete}>&times;</button>
       </li>
     )
   }

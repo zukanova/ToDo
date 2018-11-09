@@ -15,14 +15,23 @@ class App extends Component {
 
   toggleDone = index => {
     const { todos } = this.state
-    const newArr = [
+    const newTodos = [
       ...todos.slice(0, index),
       { ...todos[index], done: !todos[index].done },
       ...todos.slice(index + 1)
     ]
 
     this.setState({
-      todos: newArr
+      todos: newTodos
+    })
+  }
+
+  deleteListItem = index => {
+    const { todos } = this.state
+    const newTodos = [...todos.slice(0, index), ...todos.slice(index + 1)]
+
+    this.setState({
+      todos: newTodos
     })
   }
 
@@ -44,16 +53,17 @@ class App extends Component {
     return (
       <div className="App">
         <Input keyupfunction={this.addTodoArray} />
-        <div>
+        <ul>
           {this.state.todos.map((todo, index) => (
             <Todo
               key={index}
               isDone={todo.done}
               text={todo.text}
-              click={() => this.toggleDone(index)}
+              onToggle={() => this.toggleDone(index)}
+              onDelete={() => this.deleteListItem(index)}
             />
           ))}
-        </div>
+        </ul>
       </div>
     )
   }
