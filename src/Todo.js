@@ -5,12 +5,15 @@ class Todo extends Component {
   render() {
     const { text, onToggle, isDone, onDelete } = this.props
     return (
-      <li>
+      <div className="list-item">
         <span onClick={onToggle} className={isDone ? 'done' : ''}>
+          <input type="checkbox" className="checkbox" />
           {text}
         </span>
-        <button onClick={onDelete}>&times;</button>
-      </li>
+        <button onClick={onDelete} className="delete-button">
+          &times;
+        </button>
+      </div>
     )
   }
 }

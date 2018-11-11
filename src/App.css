@@ -1,12 +1,63 @@
-#root {
-  background: lightgreen;
-  display: flex;
-  align-items: ceneter;
-  justify-content: center;
+@import url('https://fonts.googleapis.com/css?family=Arvo');
+
+body {
+  box-sizing: content-box;
   height: 100vh;
+  background-image: repeating-linear-gradient(
+    145deg,
+    #e4e4e4,
+    #e4e4e4 3px,
+    #c1d3de 3px,
+    #c1d3de 6px
+  );
+}
+
+.App {
+  background: linear-gradient(to top, #40e0d0, #ff8c00, #ff0080);
+  max-width: 85vw;
+  min-height: 70vh;
+  margin: auto;
+  padding: 12px;
+  border-radius: 3px;
+  border: solid 1.5px #303030;
 }
 
 .done {
   text-decoration: line-through;
-  color: grey);
+  color: #505050;
+}
+
+.Input {
+  height: 2rem;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  border: solid 2px #303030;
+  font-family: Arvo;
+  font-size: 1.2rem;
+}
+
+.checkbox {
+  border: solid 2px #303030;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 10px 0px;
+  /* padding-left: 5px; */
+  background-color: rgba(245, 245, 245, 0.324);
+  border: solid 2px #303030;
+  font-family: Arvo;
+  font-size: 1.3rem;
+  color: #303030;
+}
+ul {
+  padding-inline-start: 0px;
+}
+
+.delete-button {
+  font-size: 1.5rem;
+  color: #303030;
 }

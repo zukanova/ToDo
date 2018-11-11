@@ -6,7 +6,7 @@ class Input extends Component {
     return (
       <input
         type="text"
-        placeholder="Add your Todo"
+        placeholder="  Add your Todo"
         className="Input"
         onKeyUp={event => {
           this.props.keyupfunction(event)

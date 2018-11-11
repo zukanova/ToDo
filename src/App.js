@@ -9,7 +9,9 @@ class App extends Component {
     todos: [
       { text: 'lernen', done: false },
       { text: 'schlafen', done: false },
-      { text: 'essen', done: false }
+      { text: 'essen', done: false },
+      { text: 'spazieren', done: false },
+      { text: 'daddeln', done: false }
     ]
   }
 
