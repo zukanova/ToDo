@@ -1,73 +1,91 @@
 import React, { Component } from 'react'
+import uid from 'uid'
 import './App.css'
 
 import Todo from './Todo'
 import Input from './Input'
+import Separator from './Separator'
 
 class App extends Component {
   state = {
-    todos: [
-      { text: 'lernen', done: false },
-      { text: 'schlafen', done: false },
-      { text: 'essen', done: false },
-      { text: 'spazieren', done: false },
-      { text: 'daddeln', done: false }
-    ]
+    todos: this.load()
   }
 
-  toggleDone = index => {
+  toggleDone = id => {
     const { todos } = this.state
-    const newTodos = [
-      ...todos.slice(0, index),
-      { ...todos[index], done: !todos[index].done },
-      ...todos.slice(index + 1)
-    ]
+    const index = todos.findIndex(todo => todo.id === id)
+    const todo = todos[index]
 
     this.setState({
-      todos: newTodos
+      todos: [
+        ...todos.slice(0, index),
+        { ...todo, done: !todo.done },
+        ...todos.slice(index + 1)
+      ]
     })
   }
 
-  deleteListItem = index => {
+  deleteListItem = id => {
     const { todos } = this.state
-    const newTodos = [...todos.slice(0, index), ...todos.slice(index + 1)]
-
+    const index = todos.findIndex(todo => todo.id === id)
     this.setState({
-      todos: newTodos
+      todos: [...todos.slice(0, index), ...todos.slice(index + 1)]
     })
   }
 
-  addTodoArray = event => {
-    if (event.key === 'Enter') {
-      const newEntry = [
-        { text: event.target.value, done: false },
-        ...this.state.todos
-      ] //new entry, ...old entries
+  addTodo = value => {
+    const newEntry = [
+      { text: value, done: false, id: uid() },
+      ...this.state.todos
+    ]
 
-      this.setState({
-        todos: newEntry
-      })
-      event.target.value = '' // delete input entry
-    }
+    this.setState({
+      todos: newEntry
+    })
   }
+  renderOpenTodos() {
+    return this.state.todos
+      .filter(todo => !todo.done)
+      .map(this.renderSingleTodo)
+  }
+
+  renderDoneTodos() {
+    return this.state.todos.filter(todo => todo.done).map(this.renderSingleTodo)
+  }
+
+  renderSingleTodo = todo => (
+    <Todo
+      key={todo.id}
+      text={todo.text}
+      done={todo.done}
+      onToggle={() => this.toggleDone(todo.id)}
+      onDelete={() => this.deleteListItem(todo.id)}
+    />
+  )
 
   render() {
+    this.save()
     return (
       <div className="App">
-        <Input keyupfunction={this.addTodoArray} />
-        <ul>
-          {this.state.todos.map((todo, index) => (
-            <Todo
-              key={index}
-              isDone={todo.done}
-              text={todo.text}
-              onToggle={() => this.toggleDone(index)}
-              onDelete={() => this.deleteListItem(index)}
-            />
-          ))}
-        </ul>
+        <Input onEnter={this.addTodo} />
+        <Separator text="TODO" />
+        {this.renderOpenTodos()}
+        <Separator text="DONE" />
+        {this.renderDoneTodos()}
       </div>
     )
+  }
+
+  save() {
+    localStorage.setItem('todo-app--todos', JSON.stringify(this.state.todos))
+  }
+
+  load() {
+    try {
+      return JSON.parse(localStorage.getItem('todo-app--todos')) || []
+    } catch (err) {
+      return []
+    }
   }
 }
 
