@@ -23,6 +23,7 @@ const Text = styled.div`
   &.done {
     text-decoration: line-through;
     color: #505050;
+    margin-bottom: 10px;
   }
 `
 
@@ -42,7 +43,3 @@ class Todo extends Component {
 }
 
 export default Todo
-
-// ul {
-//   padding-inline-start: 0px;
-// }

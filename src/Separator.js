@@ -13,6 +13,7 @@ const Line = styled.div`
 `
 
 const Text = styled.span`
+  font-family: Arvo;
   white-space: nowrap;
 `
 

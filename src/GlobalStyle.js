@@ -1,5 +1,6 @@
-/* @import url('https://fonts.googleapis.com/css?family=Arvo');
+import { createGlobalStyle } from 'styled-components'
 
+export default createGlobalStyle`
 body {
   margin: 0;
   padding: 0;
@@ -8,9 +9,15 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: content-box;
+  
+  height: 100vh;
+  background-image: repeating-linear-gradient(
+    145deg,
+    #e4e4e4,
+    #e4e4e4 3px,
+    #c1d3de 3px,
+    #c1d3de 6px
+  );
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-} */
+`

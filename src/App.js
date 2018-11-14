@@ -5,6 +5,7 @@ import './App.css'
 import Todo from './Todo'
 import Input from './Input'
 import Separator from './Separator'
+import ToggleButton from './ToggleButton'
 
 class App extends Component {
   state = {
@@ -43,6 +44,7 @@ class App extends Component {
       todos: newEntry
     })
   }
+
   renderOpenTodos() {
     return this.state.todos
       .filter(todo => !todo.done)
@@ -68,10 +70,18 @@ class App extends Component {
     return (
       <div className="App">
         <Input onEnter={this.addTodo} />
+
         <Separator text="TODO" />
         {this.renderOpenTodos()}
         <Separator text="DONE" />
         {this.renderDoneTodos()}
+
+        <ToggleButton
+          defaultText="Foo"
+          alternativeText="Bar"
+          onClick={() => console.log('click')}
+          isDefault={true}
+        />
       </div>
     )
   }
